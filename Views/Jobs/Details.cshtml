@@ -1,0 +1,50 @@
+﻿@model RentalManagement.Models.Job
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Job</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.From_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.From_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Until_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Until_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PONum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PONum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Job_Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Job_Description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Job_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

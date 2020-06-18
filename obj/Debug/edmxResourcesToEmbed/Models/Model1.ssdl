@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RentalManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Equipment">
+    <Key>
+      <PropertyRef Name="Equipment_Id" />
+    </Key>
+    <Property Name="Equipment_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Equipment_Category" Type="nvarchar" MaxLength="50" />
+    <Property Name="Equipment_Model" Type="nvarchar" MaxLength="50" />
+    <Property Name="Equipment_Make" Type="int" />
+    <Property Name="Inven_SerialNo" Type="int" />
+  </EntityType>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="Invoice_ID" />
+    </Key>
+    <Property Name="Invoice_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="User_ID" Type="int" />
+    <Property Name="Invoice_No" Type="int" />
+    <Property Name="Amount" Type="money" Nullable="false" />
+    <Property Name="Job_ID" Type="int" Nullable="false" />
+    <Property Name="Rental_ID" Type="int" Nullable="false" />
+    <Property Name="Equipment_ID" Type="int" Nullable="false" />
+    <Property Name="Vendor_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Jobs">
+    <Key>
+      <PropertyRef Name="Job_ID" />
+    </Key>
+    <Property Name="Job_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="From_Date" Type="datetime" />
+    <Property Name="Until_Date" Type="datetime" />
+    <Property Name="PONum" Type="int" />
+    <Property Name="Job_Description" Type="nvarchar" MaxLength="225" />
+  </EntityType>
+  <EntityType Name="Rentals">
+    <Key>
+      <PropertyRef Name="Rental_ID" />
+    </Key>
+    <Property Name="Rental_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Receive_Date" Type="datetime" />
+    <Property Name="Receive_hr" Type="time" Precision="7" />
+    <Property Name="Return_Date" Type="datetime" />
+    <Property Name="Return_hr" Type="time" Precision="7" />
+    <Property Name="Rental_rate" Type="int" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="User_ID" />
+    </Key>
+    <Property Name="User_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="25" />
+    <Property Name="LastName" Type="varchar" MaxLength="25" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Passwords" Type="nvarchar" MaxLength="255" />
+    <Property Name="IsAdmin" Type="bit" />
+  </EntityType>
+  <EntityType Name="Vendors">
+    <Key>
+      <PropertyRef Name="Vendor_ID" />
+    </Key>
+    <Property Name="Vendor_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SalesPerson" Type="nvarchar" MaxLength="225" />
+    <Property Name="Address" Type="nvarchar" MaxLength="255" />
+    <Property Name="Phone_No" Type="nvarchar" MaxLength="225" />
+  </EntityType>
+  <Association Name="FK__Invoice__User_ID__412EB0B6">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="User_ID" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="User_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Equipment_ID">
+    <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipment">
+        <PropertyRef Name="Equipment_Id" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="Equipment_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Job_ID">
+    <End Role="Jobs" Type="Self.Jobs" Multiplicity="1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Jobs">
+        <PropertyRef Name="Job_ID" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="Job_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rental_ID">
+    <End Role="Rentals" Type="Self.Rentals" Multiplicity="1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rentals">
+        <PropertyRef Name="Rental_ID" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="Rental_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vendor_ID">
+    <End Role="Vendors" Type="Self.Vendors" Multiplicity="1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendors">
+        <PropertyRef Name="Vendor_ID" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="Vendor_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RentalManagementModelStoreContainer">
+    <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Jobs" EntityType="Self.Jobs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rentals" EntityType="Self.Rentals" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vendors" EntityType="Self.Vendors" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Invoice__User_ID__412EB0B6" Association="Self.FK__Invoice__User_ID__412EB0B6">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Invoice" EntitySet="Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Equipment_ID" Association="Self.FK_Equipment_ID">
+      <End Role="Equipment" EntitySet="Equipment" />
+      <End Role="Invoice" EntitySet="Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Job_ID" Association="Self.FK_Job_ID">
+      <End Role="Jobs" EntitySet="Jobs" />
+      <End Role="Invoice" EntitySet="Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rental_ID" Association="Self.FK_Rental_ID">
+      <End Role="Rentals" EntitySet="Rentals" />
+      <End Role="Invoice" EntitySet="Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vendor_ID" Association="Self.FK_Vendor_ID">
+      <End Role="Vendors" EntitySet="Vendors" />
+      <End Role="Invoice" EntitySet="Invoice" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
