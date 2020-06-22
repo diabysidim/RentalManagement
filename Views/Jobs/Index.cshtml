@@ -1,51 +1,77 @@
-﻿@model IEnumerable<RentalManagement.Models.Job>
+﻿
+@model PagedList.IPagedList<RentalManagement.Models.Job>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Job Lists</h2>
+
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add a new job", "Create")
 </p>
+@using (Html.BeginForm())
+{
+
+    <div class="row">
+        Find a Job: @Html.TextBox("searchString", "", new { @class= "form-control"})
+        <input type="submit" class="btn btn-default" value="Find" />
+    </div>
+}
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.From_Date)
+            @Html.ActionLink("Job Title", "Index", new { sortOrder = ViewBag.TitleSortParam })
+
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Until_Date)
+            @Html.ActionLink("Start Date", "Index", new { sortOrder = ViewBag.StartDateSortParam })
+
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PONum)
+            @Html.ActionLink("End Date", "Index", new { sortOrder = ViewBag.EndDateSortParam })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Job_Description)
+            Job Destruction
+        </th>
+        <th>
+            @Html.ActionLink("Last Updated", "Index", new { sortOrder = ViewBag.UpdateDateSortParam })
         </th>
         <th></th>
+
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.From_Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Until_Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PONum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Job_Description)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Job_ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Job_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Job_ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Job_Title, "Details", new { id = item.Job_ID })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Start_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.End_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job_Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Last_Update)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Job_ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Job_ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Job_ID })
+            </td>
+        </tr>
+    }
 
 </table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { Page_NO = page, sortOrder = ViewBag.CurrentSort, Filter_Value = ViewBag.FilterValue }))

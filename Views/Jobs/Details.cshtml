@@ -4,47 +4,58 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+    <h2>@Html.DisplayFor(model => model.Job_Title) Details</h2>
 
 <div>
-    <h4>Job</h4>
+    
     <hr />
     <dl class="dl-horizontal">
+
         <dt>
-            @Html.DisplayNameFor(model => model.From_Date)
+            Job Title
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.From_Date)
+            @Html.DisplayFor(model => model.Job_Title)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.Until_Date)
+            Start Date
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Until_Date)
+            @Html.DisplayFor(model => model.Start_Date)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PONum)
+           End Date
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PONum)
+            @Html.DisplayFor(model => model.End_Date)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Job_Description)
+            Job Description
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Job_Description)
         </dd>
 
+        <dt>
+            Last Updated
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Last_Update)
+        </dd>
+
+
+
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Job_ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index") |
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Job_ID })
 </p>
