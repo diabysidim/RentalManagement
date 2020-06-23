@@ -1,0 +1,63 @@
+﻿@model RentalManagement.Models.User
+@{
+    ViewBag.Title = "LogIn";
+
+}
+@section Scripts{
+    <link href="../Content/Login.css" rel="stylesheet" type="text/css" />
+
+
+
+    <h2>
+    </h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <div id="login">
+
+            <table id="table " border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                    <th colspan="3">
+                        MOSITES RENTAL MANAGEMENT
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        Email
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.Email)
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "error" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Password
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.Passwords)
+                        @Html.ValidationMessageFor(model => model.Passwords, "", new { @class = "error" })
+                    </td>
+                </tr>
+            </table>
+            <table id="submittable">
+
+
+                <td id="Remme">Remember Me :  @Html.CheckBoxFor(m => m.RememberMe)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="button" type="submit" value="Login" /></td>
+
+                @*<a href="~/Home"></a>*@
+            </table>
+        </div>
+        @*<div id="Remme">Remember Me :  @Html.CheckBoxFor(m => m.RememberMe)</div>
+            <div></div>
+            <div id="submit"><input type="submit" value="Login" width:40px /></div>*@
+
+    }
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/custom-validator")
+
+
+    }
