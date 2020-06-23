@@ -21,10 +21,11 @@ namespace RentalManagement.Models
         }
     
         public int Job_ID { get; set; }
-        public Nullable<System.DateTime> From_Date { get; set; }
-        public Nullable<System.DateTime> Until_Date { get; set; }
-        public Nullable<int> PONum { get; set; }
+        public Nullable<System.DateTime> Start_Date { get; set; }
+        public Nullable<System.DateTime> End_Date { get; set; }
         public string Job_Description { get; set; }
+        public Nullable<System.DateTime> Last_Update { get; set; }
+        public string Job_Title { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Invoice> Invoices { get; set; }

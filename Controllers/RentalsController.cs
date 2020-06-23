@@ -46,8 +46,9 @@ namespace RentalManagement.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Rental_ID,Receive_Date,Receive_hr,Return_Date,Return_hr,Rental_rate")] Rental rental)
+        public ActionResult Create([Bind(Include = "Rental_ID,Receive_Date,Receive_hr,Return_Date,Return_hr,Rental_rate,Equipment_Name")] Rental rental)
         {
+
             if (ModelState.IsValid)
             {
                 db.Rentals.Add(rental);
@@ -78,7 +79,7 @@ namespace RentalManagement.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Rental_ID,Receive_Date,Receive_hr,Return_Date,Return_hr,Rental_rate")] Rental rental)
+        public ActionResult Edit([Bind(Include = "Rental_ID,Receive_Date,Receive_hr,Return_Date,Return_hr,Rental_rate,Equipment_Name")] Rental rental)
         {
             if (ModelState.IsValid)
             {

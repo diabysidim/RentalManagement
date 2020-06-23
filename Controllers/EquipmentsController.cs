@@ -17,7 +17,8 @@ namespace RentalManagement.Controllers
         // GET: Equipments
         public ActionResult Index()
         {
-            return View(db.Equipments.ToList());
+            var equipments = db.Equipments.Include(e => e.Rental);
+            return View(equipments.ToList());
         }
 
         // GET: Equipments/Details/5
@@ -38,6 +39,7 @@ namespace RentalManagement.Controllers
         // GET: Equipments/Create
         public ActionResult Create()
         {
+            ViewBag.Rental_ID = new SelectList(db.Rentals, "Rental_ID", "Equipment_Name");
             return View();
         }
 
@@ -46,7 +48,7 @@ namespace RentalManagement.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Equipment_Id,Equipment_Category,Equipment_Model,Equipment_Make,Inven_SerialNo")] Equipment equipment)
+        public ActionResult Create([Bind(Include = "Equipment_Id,Equipment_Category,Equipment_Model,Equipment_Make,Inven_SerialNo,Equipment_Name,Rental_ID")] Equipment equipment)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +57,7 @@ namespace RentalManagement.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.Rental_ID = new SelectList(db.Rentals, "Rental_ID", "Equipment_Name", equipment.Rental_ID);
             return View(equipment);
         }
 
@@ -70,6 +73,7 @@ namespace RentalManagement.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Rental_ID = new SelectList(db.Rentals, "Rental_ID", "Equipment_Name", equipment.Rental_ID);
             return View(equipment);
         }
 
@@ -78,7 +82,7 @@ namespace RentalManagement.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Equipment_Id,Equipment_Category,Equipment_Model,Equipment_Make,Inven_SerialNo")] Equipment equipment)
+        public ActionResult Edit([Bind(Include = "Equipment_Id,Equipment_Category,Equipment_Model,Equipment_Make,Inven_SerialNo,Equipment_Name,Rental_ID")] Equipment equipment)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +90,7 @@ namespace RentalManagement.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.Rental_ID = new SelectList(db.Rentals, "Rental_ID", "Equipment_Name", equipment.Rental_ID);
             return View(equipment);
         }
 

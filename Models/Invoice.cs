@@ -14,16 +14,22 @@ namespace RentalManagement.Models
     
     public partial class Invoice
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Invoice()
+        {
+            this.Invoice_Equipment = new HashSet<Invoice_Equipment>();
+        }
+    
         public int Invoice_ID { get; set; }
-        public Nullable<int> User_ID { get; set; }
         public Nullable<int> Invoice_No { get; set; }
         public decimal Amount { get; set; }
         public int Job_ID { get; set; }
         public int Rental_ID { get; set; }
-        public int Equipment_ID { get; set; }
         public int Vendor_ID { get; set; }
+        public Nullable<int> User_ID { get; set; }
     
-        public virtual Equipment Equipment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Invoice_Equipment> Invoice_Equipment { get; set; }
         public virtual User User { get; set; }
         public virtual Job Job { get; set; }
         public virtual Rental Rental { get; set; }

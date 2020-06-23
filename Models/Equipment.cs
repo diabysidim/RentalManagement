@@ -17,7 +17,7 @@ namespace RentalManagement.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Equipment()
         {
-            this.Invoices = new HashSet<Invoice>();
+            this.Invoice_Equipment = new HashSet<Invoice_Equipment>();
         }
     
         public int Equipment_Id { get; set; }
@@ -25,8 +25,11 @@ namespace RentalManagement.Models
         public string Equipment_Model { get; set; }
         public Nullable<int> Equipment_Make { get; set; }
         public Nullable<int> Inven_SerialNo { get; set; }
+        public string Equipment_Name { get; set; }
+        public int Rental_ID { get; set; }
     
+        public virtual Rental Rental { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Invoice> Invoices { get; set; }
+        public virtual ICollection<Invoice_Equipment> Invoice_Equipment { get; set; }
     }
 }

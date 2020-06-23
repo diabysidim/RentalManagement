@@ -28,14 +28,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Equipment.Equipment_Category)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Equipment.Equipment_Category)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.User.FirstName)
         </dt>
 
@@ -52,11 +44,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Rental.Rental_ID)
+            @Html.DisplayNameFor(model => model.Rental.Equipment_Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Rental.Rental_ID)
+            @Html.DisplayFor(model => model.Rental.Equipment_Name)
         </dd>
 
         <dt>
@@ -69,12 +61,15 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
+
             <input type="submit" value="Delete" class="btn btn-default" /> |
             @Html.ActionLink("Back to List", "Index")
         </div>
-    }
-</div>
+        
+        }
+    </div>

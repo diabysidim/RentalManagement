@@ -27,6 +27,7 @@ namespace RentalManagement.Models
     
         public virtual DbSet<Equipment> Equipments { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
+        public virtual DbSet<Invoice_Equipment> Invoice_Equipment { get; set; }
         public virtual DbSet<Job> Jobs { get; set; }
         public virtual DbSet<Rental> Rentals { get; set; }
         public virtual DbSet<User> Users { get; set; }

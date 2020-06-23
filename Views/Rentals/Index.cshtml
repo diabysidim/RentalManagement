@@ -26,6 +26,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Rental_rate)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Equipment_Name)
+        </th>
         <th></th>
     </tr>
 
@@ -45,6 +48,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Rental_rate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Equipment_Name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Rental_ID }) |
